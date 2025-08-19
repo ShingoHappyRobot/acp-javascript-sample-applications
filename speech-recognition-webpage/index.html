@@ -27,6 +27,25 @@
             background: black;
             width: 600px;
         }
+        
+        #latencyInfo {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        #latencyInfo p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        #latencyInfo span {
+            font-weight: bold;
+            color: #0066cc;
+        }
     </style>
 </head>
 
@@ -124,6 +143,17 @@
             <button id="executeHrpButton">同期HTTP音声認識API実行(短い音声ファイル)</button>
         </div>
         <div>
+            <h3>Latency Information</h3>
+            <div id="latencyInfo">
+                <p>Last Audio Sent: <span id="lastAudioSent">-</span></p>
+                <p>Last Result Received: <span id="lastResultReceived">-</span></p>
+                <p>Current Latency: <span id="currentLatency">-</span></p>
+                <p>Average Latency: <span id="averageLatency">-</span></p>
+                <p>Min Latency: <span id="minLatency">-</span></p>
+                <p>Max Latency: <span id="maxLatency">-</span></p>
+            </div>
+        </div>
+        <div>
             <textarea id="logs" readonly></textarea>
         </div>
         <script>
@@ -147,6 +177,84 @@
                 const executeHrpButtonElement = document.getElementById("executeHrpButton");
 
                 const logsElement = document.getElementById("logs");
+
+                // Latency tracking variables
+                const lastAudioSentElement = document.getElementById("lastAudioSent");
+                const lastResultReceivedElement = document.getElementById("lastResultReceived");
+                const currentLatencyElement = document.getElementById("currentLatency");
+                const averageLatencyElement = document.getElementById("averageLatency");
+                const minLatencyElement = document.getElementById("minLatency");
+                const maxLatencyElement = document.getElementById("maxLatency");
+                
+                let lastAudioSentTime = null;
+                let latencyHistory = [];
+                let audioChunkCounter = 0;
+                let resultCounter = 0;
+
+                // Latency tracking functions
+                function updateLatencyInfo() {
+                    if (lastAudioSentTime) {
+                        lastAudioSentElement.textContent = new Date(lastAudioSentTime).toLocaleTimeString();
+                    }
+                    if (latencyHistory.length > 0) {
+                        const latest = latencyHistory[latencyHistory.length - 1];
+                        currentLatencyElement.textContent = latest.toFixed(2) + " ms";
+                        averageLatencyElement.textContent = (latencyHistory.reduce((a, b) => a + b, 0) / latencyHistory.length).toFixed(2) + " ms";
+                        minLatencyElement.textContent = Math.min(...latencyHistory).toFixed(2) + " ms";
+                        maxLatencyElement.textContent = Math.max(...latencyHistory).toFixed(2) + " ms";
+                    }
+                }
+
+                function recordAudioSent() {
+                    lastAudioSentTime = Date.now();
+                    audioChunkCounter++;
+                    updateLatencyInfo();
+                }
+
+                function recordResultReceived() {
+                    if (lastAudioSentTime) {
+                        const latency = Date.now() - lastAudioSentTime;
+                        latencyHistory.push(latency);
+                        resultCounter++;
+                        
+                        // Keep only last 100 measurements for performance
+                        if (latencyHistory.length > 100) {
+                            latencyHistory.shift();
+                        }
+                        
+                        lastResultReceivedElement.textContent = new Date().toLocaleTimeString();
+                        updateLatencyInfo();
+                        
+                        addLog(`Latency: ${latency.toFixed(2)}ms (Audio chunk: ${audioChunkCounter}, Result: ${resultCounter})`);
+                    }
+                }
+
+                // Custom WebSocket wrapper to track audio data transmission
+                function createLatencyTrackingWebSocket() {
+                    // Store original WebSocket
+                    const OriginalWebSocket = window.WebSocket;
+                    
+                    // Override WebSocket constructor
+                    window.WebSocket = function(url, protocols) {
+                        const ws = new OriginalWebSocket(url, protocols);
+                        
+                        // Override send method to track audio data
+                        const originalSend = ws.send;
+                        ws.send = function(data) {
+                            // Check if this is audio data (starts with 'p' character)
+                            if (data instanceof Uint8Array && data.length > 0 && data[0] === 0x70) {
+                                recordAudioSent();
+                            }
+                            return originalSend.call(this, data);
+                        };
+                        
+                        return ws;
+                    };
+                    
+                    // Copy static properties
+                    Object.setPrototypeOf(window.WebSocket, OriginalWebSocket);
+                    Object.setPrototypeOf(window.WebSocket.prototype, OriginalWebSocket.prototype);
+                }
 
                 // 音声ファイルを変更したときの処理
                 audioFileElement.addEventListener("change", async function (event) {
@@ -363,6 +471,17 @@
                     if (Wrp.isActive()) {
                         return;
                     }
+                    
+                    // Initialize latency tracking WebSocket wrapper
+                    createLatencyTrackingWebSocket();
+                    
+                    // Reset latency tracking for new session
+                    lastAudioSentTime = null;
+                    latencyHistory = [];
+                    audioChunkCounter = 0;
+                    resultCounter = 0;
+                    updateLatencyInfo();
+                    
                     let resultJson = [];
                     Wrp.serverURL = "wss://acp-api.amivoice.com/v1/";
                     if (loggingOptOutElement.checked) {
@@ -405,11 +524,13 @@
                     Wrp.resultUpdated = function (result) {
                         const resultJsonPart = JSON.parse(result);
                         addLog(resultJsonPart.text);
+                        recordResultReceived();
                     };
                     Wrp.resultFinalized = function (result) {
                         const resultJsonPart = JSON.parse(result);
                         addLog(resultJsonPart.text);
                         resultJson.push(resultJsonPart);
+                        recordResultReceived();
                     };
                     Wrp.feedDataPauseEnded = function () {
                         const blob = Recorder.getWaveFile();
