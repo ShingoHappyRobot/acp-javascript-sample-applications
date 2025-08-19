@@ -12,7 +12,7 @@
     <script type="text/javascript" src="./lib/wrp/wrp.js"></script>
     <style>
         * {
-            font-family: 'Hiragino Kaku Gothic ProN', 'Helvetica', 'Verdana', 'Lucida Grande', 'ヒラギノ角ゴ ProN', sans-serif;
+            font-family: 'Hiragino Kaku Gothic ProN', 'Helvetica', 'Verdana', 'Lucida Grande', sans-serif;
         }
 
         a {
@@ -57,70 +57,70 @@
                 <td><input id="appKey" type="password"><br></td>
             </tr>
             <tr>
-                <td><label for="audioFile">音声ファイル</label></td>
+                <td><label for="audioFile">Audio File</label></td>
                 <td><input id="audioFile" type="file" accept=".wav,.mp3,.flac,.opus,.m4a,.mp4,.webm"></td>
             </tr>
             <tr>
-                <td><label>音声ファイルのオーディオ情報</label></td>
+                <td><label>Audio File Information</label></td>
                 <td><span id="audioInfo"></span></td>
             </tr>
             <tr>
-                <td><label for="engineMode">接続エンジン<label></td>
+                <td><label for="engineMode">Connection Engine<label></td>
                 <td>
                     <select name="engineMode" id="engineMode">
-                        <option value="-a-general">会話_汎用</option>
-                        <option value="-a-general-input">音声入力_汎用</option>
-                        <option value="-a-medgeneral">会話_医療</option>
-                        <option value="-a-medgeneral-input">音声入力_医療</option>
-                        <option value="-a-bizmrreport">会話_製薬</option>
-                        <option value="-a-bizmrreport-input">音声入力_製薬</option>
-                        <option value="-a-medkarte-input">音声入力_電子カルテ</option>
-                        <option value="-a-bizinsurance">会話_保険</option>
-                        <option value="-a-bizinsurance-input">音声入力_保険</option>
-                        <option value="-a-bizfinance">会話_金融</option>
-                        <option value="-a-bizfinance-input">音声入力_金融</option>
-                        <option value="-a-general-en">英語_汎用</option>
-                        <option value="-a-general-zh">中国語_汎用</option>
+                        <option value="-a-general">Conversation_General</option>
+                        <option value="-a-general-input">Voice Input_General</option>
+                        <option value="-a-medgeneral">Conversation_Medical</option>
+                        <option value="-a-medgeneral-input">Voice Input_Medical</option>
+                        <option value="-a-bizmrreport">Conversation_Pharmaceutical</option>
+                        <option value="-a-bizmrreport-input">Voice Input_Pharmaceutical</option>
+                        <option value="-a-medkarte-input">Voice Input_Electronic Medical Record</option>
+                        <option value="-a-bizinsurance">Conversation_Insurance</option>
+                        <option value="-a-bizinsurance-input">Voice Input_Insurance</option>
+                        <option value="-a-bizfinance">Conversation_Finance</option>
+                        <option value="-a-bizfinance-input">Voice Input_Finance</option>
+                        <option value="-a-general-en">English_General</option>
+                        <option value="-a-general-zh">Chinese_General</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td><label for="loggingOptOut">サービス向上のための音声と認識結果の提供を行わない(ログ保存なし)</label></td>
+                <td><label for="loggingOptOut">Do not provide audio and recognition results for service improvement (no log storage)</label></td>
                 <td><input type="checkbox" id="loggingOptOut" checked></td>
             </tr>
             <tr>
-                <td><label for="keepFillerToken">フィラー単語(言い淀み)を認識結果に含める</label></td>
+                <td><label for="keepFillerToken">Include filler words (hesitations) in recognition results</label></td>
                 <td><input type="checkbox" id="keepFillerToken"></td>
             </tr>
             <tr>
-                <td><label for="speakerDiarization">話者ダイアライゼーションを有効にする</label></td>
+                <td><label for="speakerDiarization">Enable speaker diarization</label></td>
                 <td><input type="checkbox" id="speakerDiarization"></td>
             </tr>
             <tr>
-                <td><label for="sentimentAnalysis">感情解析を有効にする(非同期HTTP音声認識APIのみ)</label></td>
+                <td><label for="sentimentAnalysis">Enable sentiment analysis (Asynchronous HTTP Speech Recognition API only)</label></td>
                 <td><input type="checkbox" id="sentimentAnalysis"></td>
             </tr>
             <tr>
-                <td><label for="profileWords">ユーザー登録単語</label></td>
+                <td><label for="profileWords">User Registered Words</label></td>
                 <td><input type="text" id="profileWords"
-                        title="{表記1}{半角スペース}{読み1}|{表記2}{半角スペース}{読み2}のように指定します。例:AmiVoice あみぼいす|猫 きかい"></td>
+                        title="Specify as {notation1}{space}{reading1}|{notation2}{space}{reading2}. Example: AmiVoice amivoisu|neko neko"></td>
             </tr>
             <tr>
-                <td><label for="useUserMedia">マイクの音声を認識する(WebSocket音声認識API用)</label></td>
+                <td><label for="useUserMedia">Recognize microphone audio (for WebSocket Speech Recognition API)</label></td>
                 <td><input type="checkbox" id="useUserMedia" checked></td>
             </tr>
             <tr>
-                <td><label for="useDisplayMedia">システムの音声を認識する(WebSocket音声認識API用)</label></td>
+                <td><label for="useDisplayMedia">Recognize system audio (for WebSocket Speech Recognition API)</label></td>
                 <td><input type="checkbox" id="useDisplayMedia"></td>
             </tr>
             <tr>
-                <td><label for="useOpusRecorder">音声データをサーバーに送信する前にOgg Opus形式に圧縮する</label></td>
+                <td><label for="useOpusRecorder">Compress audio data to Ogg Opus format before sending to server</label></td>
                 <td><input type="checkbox" id="useOpusRecorder" checked></td>
             </tr>
             <tr>
                 <td colspan="2">
                     <div style="font-size: smaller; margin-left: 20px;">
-                        <div>Ogg Opus形式への圧縮には下記のプログラムを使用しています。</div>
+                        <div>The following program is used for compression to Ogg Opus format.</div>
                         <div>
                             Opus Recorder License (MIT)<br>
                             Original Work Copyright © 2013 Matt Diamond<br>
@@ -135,12 +135,12 @@
         </tbody>
     </table>
     <div>
-        <a href="player.html" rel="noopener noreferrer" target="_blank">音声プレイヤーを開く</a>
+        <a href="player.html" rel="noopener noreferrer" target="_blank">Open Audio Player</a>
         <div>
-            <button id="executeAsyncButton">非同期HTTP音声認識API実行(音声ファイル)</button><br>
-            <button id="startWrpButton">WebSocket音声認識API開始(マイク or システム)</button>
-            <button id="stopWrpButton">WebSocket音声認識API停止</button><br>
-            <button id="executeHrpButton">同期HTTP音声認識API実行(短い音声ファイル)</button>
+            <button id="executeAsyncButton">Execute Asynchronous HTTP Speech Recognition API (Audio File)</button><br>
+            <button id="startWrpButton">Start WebSocket Speech Recognition API (Microphone or System)</button>
+            <button id="stopWrpButton">Stop WebSocket Speech Recognition API</button><br>
+            <button id="executeHrpButton">Execute Synchronous HTTP Speech Recognition API (Short Audio File)</button>
         </div>
         <div>
             <h3>Latency Information</h3>
@@ -256,7 +256,7 @@
                     Object.setPrototypeOf(window.WebSocket.prototype, OriginalWebSocket.prototype);
                 }
 
-                // 音声ファイルを変更したときの処理
+                // Process when audio file is changed
                 audioFileElement.addEventListener("change", async function (event) {
                     audioInfoElement.textContent = "";
                     const input = event.target;
@@ -274,9 +274,9 @@
                 });
 
                 /**
-                 * 音声ファイルの情報を取得します。
-                 * @param {File} audioFile 音声ファイル
-                 * @returns 音声ファイルの情報
+                 * Get audio file information.
+                 * @param {File} audioFile Audio file
+                 * @returns Audio file information
                  */
                 async function getAudioInfo(audioFile) {
                     const getAudioInfo_ = function (audioFile) {
@@ -327,22 +327,22 @@
                     return await getAudioInfo_(audioFile);
                 }
 
-                // 非同期HTTP音声認識APIの実行
+                                    // Execute Asynchronous HTTP Speech Recognition API
                 executeAsyncButtonElement.addEventListener("click", function (event) {
                     if (appKeyElement.value.length === 0) {
-                        alert("APPKEYを入力してください。");
+                        alert("Please enter APPKEY.");
                         return;
                     }
                     if (audioFileElement.files.length === 0) {
-                        alert("音声ファイルを選択してください。");
+                        alert("Please select an audio file.");
                         return;
                     }
                     const selectedFile = audioFileElement.files[0];
                     if (!(/\.(?:wav|mp3|flac|opus|m4a|mp4|webm)$/i.test(selectedFile.name))) {
-                        alert(".wav,.mp3,.flac,.opus,.m4a,.mp4,.webmファイルを選択してください。");
+                        alert("Please select a .wav, .mp3, .flac, .opus, .m4a, .mp4, or .webm file.");
                         return;
                     }
-                    addLog("ジョブの登録処理開始。");
+                    addLog("Starting job registration process.");
                     const asyncHrp = new AsyncHrp();
                     asyncHrp.onProgress = function (message, sessionId) {
                         addLog((sessionId !== null ? "[" + sessionId + "]" : "") + message);
@@ -364,22 +364,22 @@
                     postJob(appKeyElement.value, selectedFile, asyncHrp);
                 });
 
-                // 同期HTTP音声認識APIの実行
+                // Execute Synchronous HTTP Speech Recognition API
                 executeHrpButtonElement.addEventListener("click", function (event) {
                     if (appKeyElement.value.length === 0) {
-                        alert("APPKEYを入力してください。");
+                        alert("Please enter APPKEY.");
                         return;
                     }
                     if (audioFileElement.files.length === 0) {
-                        alert("音声ファイルを選択してください。");
+                        alert("Please select an audio file.");
                         return;
                     }
                     const selectedFile = audioFileElement.files[0];
                     if (!(/\.(?:wav|mp3|flac|opus|m4a|mp4|webm)$/i.test(selectedFile.name))) {
-                        alert(".wav,.mp3,.flac,.opus,m4a,.mp4,.webmファイルを選択してください。");
+                        alert("Please select a .wav, .mp3, .flac, .opus, .m4a, .mp4, or .webm file.");
                         return;
                     }
-                    addLog("同期HTTP音声認識API実行。");
+                    addLog("Executing Synchronous HTTP Speech Recognition API.");
                     const easyHrp = new EasyHrp();
                     easyHrp.onError = function (message, sessionId) {
                         addLog((sessionId != null ? "[" + sessionId + "]" : "") + message);
@@ -398,19 +398,19 @@
                 });
 
                 /**
-                 * 非同期/同期 HTTP音声認識API を実行します。
+                 * Execute Asynchronous/Synchronous HTTP Speech Recognition API.
                  * @param {string} appKey APPKEY
-                 * @param {File} audioFile 音声ファイル
-                 * @param {object} recognizerClient AsyncHrp/EasyHrpオブジェクト
+                 * @param {File} audioFile Audio file
+                 * @param {object} recognizerClient AsyncHrp/EasyHrp object
                  */
                 function postJob(appKey, audioFile, recognizerClient) {
                     const reader = new FileReader();
                     reader.onload = () => {
                         const AudioContext = window.AudioContext || window.webkitAudioContext;
                         const audioContext = new AudioContext({ sampleRate: 16000 });
-                        // 音声ファイルを32bit リニアPCMに変換
+                        // Convert audio file to 32bit linear PCM
                         audioContext.decodeAudioData(reader.result, async function (audioBuffer) {
-                            // モノラルにダウンミックス
+                            // Downmix to mono
                             const OfflineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
                             const offlineAudioContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
                             const merger = offlineAudioContext.createChannelMerger(audioBuffer.numberOfChannels);
@@ -431,13 +431,13 @@
                             audioContext.close();
 
                             if (useOpusRecorderElement.checked) {
-                                // モノラルの32bit リニアPCMをOgg Opusに変換
+                                // Convert mono 32bit linear PCM to Ogg Opus
                                 const opusEncoderWrapper = new OpusEncoderWrapper();
                                 opusEncoderWrapper.originalSampleRate = audioBuffer.sampleRate;
                                 opusEncoderWrapper.useStream = false;
                                 opusEncoderWrapper.onCompleted = function (opusData) {
                                     const convertedAudioFile = new Blob([opusData], { type: "audio/ogg; codecs=opus" });
-                                    // 音声認識を実行
+                                    // Execute speech recognition
                                     if (typeof recognizerClient.postJob !== 'undefined') {
                                         recognizerClient.postJob(appKey, convertedAudioFile);
                                     }
@@ -447,12 +447,12 @@
                                 opusEncoderWrapper.encode(float32PcmData);
                                 opusEncoderWrapper.stop();
                             } else {
-                                // モノラルの32bit リニアPCMを独自ヘッダ付きのDVI/IMA ADPCMに変換
+                                // Convert mono 32bit linear PCM to custom header DVI/IMA ADPCM
                                 const audioFileConverter = new Worker('./scripts/ami-adpcm-worker.js');
                                 audioFileConverter.onmessage = (event) => {
                                     const convertedAudioFile = new Blob([event.data], { type: "application/octet-stream" });
                                     audioFileConverter.terminate();
-                                    // 音声認識を実行
+                                    // Execute speech recognition
                                     if (typeof recognizerClient.postJob !== 'undefined') {
                                         recognizerClient.postJob(appKey, convertedAudioFile);
                                     }
@@ -466,7 +466,7 @@
                     reader.readAsArrayBuffer(audioFile);
                 }
 
-                // WebSocket音声認識APIの実行
+                // Execute WebSocket Speech Recognition API
                 startWrpButtonElement.addEventListener("click", function (event) {
                     if (Wrp.isActive()) {
                         return;
@@ -510,16 +510,16 @@
                         }
                     };
                     Wrp.connectStarted = function () {
-                        addLog("WebSocket: 音声認識サーバー接続中...");
+                        addLog("WebSocket: Connecting to speech recognition server...");
                     };
                     Wrp.connectEnded = function () {
-                        addLog("WebSocket: 音声認識サーバー接続完了(音声認識準備完了)。");
+                        addLog("WebSocket: Speech recognition server connection completed (speech recognition ready).");
                     };
                     Wrp.disconnectStarted = function () {
-                        addLog("WebSocket: 音声認識サーバー切断中...");
+                        addLog("WebSocket: Disconnecting from speech recognition server...");
                     };
                     Wrp.disconnectEnded = function () {
-                        addLog("WebSocket: 音声認識サーバー切断完了。");
+                        addLog("WebSocket: Speech recognition server disconnection completed.");
                     };
                     Wrp.resultUpdated = function (result) {
                         const resultJsonPart = JSON.parse(result);
@@ -541,7 +541,7 @@
                     };
                     Wrp.feedDataResume();
                 });
-                // WebSocket音声認識APIの停止
+                // Stop WebSocket Speech Recognition API
                 stopWrpButtonElement.addEventListener("click", function (event) {
                     if (!Wrp.isActive()) {
                         return;
@@ -550,9 +550,9 @@
                 });
 
                 /**
-                 * 認識結果JSONから画面(HTML要素)を構築します
-                 * @param {object} resultJson 音声認識結果JSON
-                 * @param {object} audioFile 音声ファイル
+                 * Build screen (HTML elements) from recognition result JSON
+                 * @param {object} resultJson Speech recognition result JSON
+                 * @param {object} audioFile Audio file
                  */
                 function drawResultView(resultJson, audioFile) {
                     const webVttConverter = new Worker('./scripts/ami-webvtt-worker.js');
@@ -561,13 +561,13 @@
                         vttSamples[0] = event.data;
                         webVttConverter.terminate();
 
-                        // 読み以外の付加情報を取り除いたWEBVTT(スタイル、感情解析の結果、vタグを削除)
+                        // WEBVTT with additional information removed except readings (remove styles, sentiment analysis results, v tags)
                         vttSamples[1] = vttSamples[0].replace(/\nSTYLE[\s\S]+}\n/m, '')
                             .replaceAll(new RegExp('([0-9:.]+ --> [0-9:.]+)(?:.+)', "g"), '$1')
                             .replaceAll(/\n[0-9]+\n[0-9:.]+ --> [0-9:.]+\nENERGY:[0-9]{3} STRESS:[0-9]{3}\n/mg, '')
                             .replaceAll(/<\/?(?:v|[0-9])[^>]*>/g, '');
 
-                        // 読みも取り除いたWEBVTT
+                        // WEBVTT with readings also removed
                         vttSamples[2] = vttSamples[0].replace(/\nSTYLE[\s\S]+}\n/m, '')
                             .replaceAll(new RegExp('([0-9:.]+ --> [0-9:.]+)(?:.+)', "g"), '$1')
                             .replaceAll(/\n[0-9]+\n[0-9:.]+ --> [0-9:.]+\nENERGY:[0-9]{3} STRESS:[0-9]{3}\n/mg, '')
@@ -575,7 +575,7 @@
                             .replaceAll(/<rt>[^<]*<\/rt>/g, '')
                             .replaceAll(/<[^>]*>/g, '');
 
-                        // 読みを取り除かず、読みがあるところは読みだけにしてその前後にスペースを挿入したWEBVTT
+                        // WEBVTT without removing readings, but adding spaces before and after readings where they exist
                         vttSamples[3] = vttSamples[0].replace(/\nSTYLE[\s\S]+}\n/m, '')
                             .replaceAll(new RegExp('([0-9:.]+ --> [0-9:.]+)(?:.+)', "g"), '$1')
                             .replaceAll(/\n[0-9]+\n[0-9:.]+ --> [0-9:.]+\nENERGY:[0-9]{3} STRESS:[0-9]{3}\n/mg, '')
@@ -586,28 +586,28 @@
                             .replaceAll(/<[^>]*>/g, '')
                             .replaceAll(/ ([,.?!])/g, '$1');
 
-                        // 認識結果JSONを別ウィンドウで開いたりダウンロードしたりできるようにリンクを作成
+                        // Create links to open or download recognition result JSON in a separate window
                         const links = document.createElement("div");
                         const resultJsonUrl = URL.createObjectURL(
                             new Blob([JSON.stringify(resultJson, null, "\t")], { type: 'application/json;charset=utf-8' }));
                         links.appendChild(createDownloadLink(resultJsonUrl, "JSON", "result.json"));
 
-                        // 認識結果JSONのtextを別ウィンドウで開いたりダウンロードしたりできるようにリンクを作成
+                        // Create links to open or download recognition result JSON text in a separate window
                         const linkText = document.createElement("a");
                         let resultText = "";
                         if (typeof resultJson.segments !== 'undefined') {
-                            // 非同期HTTP音声認識APIの音声認識結果JSONからsegment毎に改行で区切ったtextを取得
+                            // Get text separated by line breaks for each segment from asynchronous HTTP speech recognition API result JSON
                             resultText = resultJson.segments.map(segment => segment.results[0].text)
                                 .filter(value => (typeof value !== 'undefined' && value.length > 0))
                                 .join("\n") + "\n";
                         } else {
                             if (Array.isArray(resultJson)) {
-                                // WebSocket音声認識APIの音声認識結果JSONを配列にまとめたJSONから発話ごとに改行で区切ったtextを取得
+                                // Get text separated by line breaks for each utterance from WebSocket speech recognition API result JSON array
                                 resultText = resultJson.map(json => json.text)
                                     .filter(value => (typeof value !== 'undefined' && value.length > 0))
                                     .join("\n") + "\n";
                             } else {
-                                // 同期HTTP音声認識APIの音声認識結果JSONからtextを取得
+                                // Get text from synchronous HTTP speech recognition API result JSON
                                 resultText = resultJson.text + "\n";
                             }
                         }
@@ -615,11 +615,11 @@
                             new Blob([resultText], { type: 'text/plain;charset=utf-8' }));
                         links.appendChild(createDownloadLink(resultTextUrl, "TEXT", "result.txt"));
 
-                        // 字幕確認用のvideoエレメント作成
+                        // Create video element for subtitle verification
                         const player = document.createElement("video");
                         player.src = URL.createObjectURL(audioFile);
 
-                        // videoエレメントの字幕の設定とWebVTTのリンク作成
+                        // Set up video element subtitles and create WebVTT links
                         for (let i = 0; i < vttSamples.length; i++) {
                             const track = document.createElement("track");
                             if (i == 0) {
@@ -628,10 +628,10 @@
                             const vttUrl = URL.createObjectURL(
                                 new Blob([vttSamples[i]], { type: 'text/vtt;charset=utf-8' }));
                             track.src = vttUrl;
-                            track.label = "サンプル" + (i + 1).toString();
+                            track.label = "Sample" + (i + 1).toString();
                             player.appendChild(track);
                             links.appendChild(createDownloadLink(
-                                vttUrl, "WebVTTサンプル" + (i + 1).toString(), "sample" + (i + 1).toString() + ".vtt"));
+                                vttUrl, "WebVTT Sample" + (i + 1).toString(), "sample" + (i + 1).toString() + ".vtt"));
                         }
                         player.addEventListener("mouseover", function () {
                             this.setAttribute("controls", "");
@@ -646,11 +646,11 @@
                 }
 
                 /**
-                 * ダウンロードリンクを作成します。
+                 * Create download link.
                  * @param {string} url URL
-                 * @param {string} title タイトル
-                 * @param {string} fineName ファイル名
-                 * @returns HTMLエレメント
+                 * @param {string} title Title
+                 * @param {string} fineName File name
+                 * @returns HTML element
                  */
                 function createDownloadLink(url, title, fileName) {
                     const divElement = document.createElement("div");
@@ -659,13 +659,13 @@
                     openLink.href = url;
                     openLink.target = "_blank";
                     openLink.rel = "noopener noreferrer";
-                    openLink.textContent = title + "を開く";
+                    openLink.textContent = "Open " + title;
                     divElement.appendChild(openLink);
 
                     const downloadLink = document.createElement("a");
                     downloadLink.href = url;
-                    downloadLink.textContent = "ダウンロードする";
-                    downloadLink.title = title + "をダウンロード";
+                    downloadLink.textContent = "Download";
+                    downloadLink.title = "Download " + title;
                     downloadLink.download = fileName;
                     divElement.appendChild(downloadLink);
 
@@ -673,8 +673,8 @@
                 }
 
                 /**
-                 * ログを出力します。
-                 * @param {string} log ログ文字列
+                 * Output log.
+                 * @param {string} log Log string
                  */
                 function addLog(log) {
                     logsElement.textContent += (new Date().toISOString() + " " + log + "\n");
